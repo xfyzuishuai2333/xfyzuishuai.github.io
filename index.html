@@ -99,7 +99,7 @@
       transition: all 1s ease;
     }
 
-    .fireworks.active {
+    。fireworks.active {
       z-index: 999;
       opacity: 0.8;
     }
@@ -117,17 +117,17 @@
 <div class="fireworks" id="fireworks" style="background-image: url('https://media.giphy.com/media/26xBIK1aFPUXY2XpO/giphy.gif');"></div>
 
 <script>
-  const fireworks = document。getElementById('fireworks');
+  const fireworks = document.getElementById('fireworks');
   const heart = document.querySelector('.heart');
-  const noBtn = document。getElementById('noBtn');
+  const noBtn = document.getElementById('noBtn');
   let refuseClicked = false;
 
   function accept() {
-    fireworks。classList。add('active');
-    heart。style。display = 'none';
+    fireworks.classList.add('active');
+    heart.style.display = 'none';
 
     setTimeout(() => {
-      document。body。innerHTML = `
+      document.body.innerHTML = `
         <h1 style="color:#ff1493;margin-top:80px;font-size:32px;">🎆 点开了就没法关闭啦～</h1>
         <h2 style="color:#e91e63;font-size:24px;">又美丽又浪漫的你终于点了「要它」❤️<br>烟花已经为这一刻绽放啦</h2>
         <div class="fireworks active" style="background-image: url('https://media.giphy.com/media/26xBIK1aFPUXY2XpO/giphy.gif');"></div>
@@ -145,8 +145,8 @@
   }
 
   function moveButtonRandomly() {
-    const btnWidth = noBtn。offsetWidth;
-    const btnHeight = noBtn。offsetHeight;
+    const btnWidth = noBtn.offsetWidth;
+    const btnHeight = noBtn.offsetHeight;
 
     // 获取可视区域尺寸
     const maxX = window.innerWidth - btnWidth;
