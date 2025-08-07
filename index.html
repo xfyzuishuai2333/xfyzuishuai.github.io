@@ -2,55 +2,67 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8">
-  <title>💔 要它 or 不要它？</title>
+  <title>要它 or 不要它 ❤️</title>
   <style>
     body {
-      background: #fff0f5;
-      text-align: center;
-      padding-top: 100px;
+      background-color: #ffe6f0;
+      margin: 0;
+      padding: 0;
       font-family: '微软雅黑', sans-serif;
-      overflow: hidden;
+      text-align: center;
     }
 
-    。heart {
-      width: 120px;
-      height: 100px;
-      background: red;
+    /* 修正后的心形（居中对称）*/
+    .heart {
       position: relative;
+      width: 100px;
+      height: 90px;
+      background: red;
       transform: rotate(-45deg);
+      transform-origin: center;
       margin: 0 auto;
     }
 
-    。heart::before,
-    。heart::after {
-      content: "";
-      width: 120px;
-      height: 100px;
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 100px;
+      height: 90px;
       background: red;
       border-radius: 50%;
-      position: absolute;
-      top: 5px;
     }
 
-    。heart::before { left: 60px; }
-    。heart::after { top: -50px; left: 0; }
+    /* 左侧心瓣 */
+    .heart::before {
+      top: -50px;
+      left: 0;
+    }
 
+    /* 右侧心瓣 */
+    .heart::after {
+      top: 0;
+      left: 50px;
+    }
+
+    /* 按钮容器 */
     .buttons {
       margin-top: 40px;
     }
 
+    /* 两个按钮样式 */
     button {
-      padding: 10px 25px;
-      margin: 0 10px;
+      padding: 12px 25px;
       font-size: 18px;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: 0.3s;
+      transition: all 0.3s ease;
+      margin: 10px;
     }
 
     .yes-btn {
-      background-color: #e91e63;
+      background-color: #ff69b4;
       color: white;
     }
 
@@ -59,24 +71,40 @@
       color: white;
     }
 
+    .yes-btn:hover {
+      background-color: #e75480;
+    }
+
+    .no-btn:hover {
+      background-color: #616161;
+    }
+
+    /* 烟花特效背景 */
     .fireworks {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 10;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/5/52/Fireworks.gif') no-repeat center center;
+      width: 100vw;
+      height: 100vh;
+      background: url('https://media.giphy.com/media/26xBIK1aFPUXY2XpO/giphy.gif') no-repeat center center;
       background-size: cover;
-      opacity: 0.7;
-      display: none;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0;
+      transition: all 1s ease;
+    }
+
+    /* 被激活时，烟花出现 */
+    .fireworks.active {
+      z-index: 999;
+      opacity: 0.8;
     }
   </style>
 </head>
 <body>
 
-  <div id="heartContainer">
+  <div class="fireworks" id="fireworks"></div>
+  <div id="mainContainer">
     <div class="heart"></div>
     <div class="buttons">
       <button class="yes-btn" onclick="accept()">要它</button>
@@ -84,35 +112,35 @@
     </div>
   </div>
 
-  <div class="fireworks" id="fireworks"></div>
-
   <script>
-    const heartContainer = document.getElementById('heartContainer');
     const fireworks = document.getElementById('fireworks');
+    const container = document.getElementById('mainContainer');
 
     function accept() {
-      heartContainer.innerHTML = `<h1>❤️ 爱你！谢谢你收下我的心！</h1>`;
-      fireworks.style.display = 'block';
-
-      // 烟火保留5秒
+      // 显示烟花
+      fireworks。classList。add('active');
+      // 修改页面内容
+      container。innerHTML = `
+        <h1 style="color:#ff1493;font-size:32px;margin-top:50px;">🎆 点开了就没法关闭啦～</h1>
+        <h2 style="color:#e91e63;font-size:24px;">又美丽又浪漫的你终于点了「要它」❤️<br>烟花已经为这一刻绽放啦</h2>
+      `;
+      // 烟花动效2秒后自动隐藏
       setTimeout(() => {
-        fireworks.style.display = 'none';
+        fireworks。classList.remove('active');
       }, 5000);
     }
 
     function refuse() {
-      // 隐藏“不要它”按钮，保留“要它”按钮
-      heartContainer.querySelectorAll('button')[1].style.display = 'none';
-
-      // 3秒后假装界面刷新（其实只是显示原始表情和按钮重新）
-      setTimeout(() => {
-        heartContainer.innerHTML = `
-          <div class="heart"></div>
-          <div class="buttons">
-            <button class="yes-btn" onclick="accept()">要它</button>
-          </div>
-        `;
-      }, 3000);
+      // 不消失，只 reload 页面
+      // 清空 container 内容后重建，模拟刷新
+      container.innerHTML = `
+        <div class="heart"></div>
+        <div class="buttons">
+          <button class="yes-btn" onclick="accept()">要它</button>
+          <button class="no-btn" onclick="refuse()">不要它</button>
+        </div>
+      `;
+      // 也可以使用 window.location.reload() 实现，但那会全部刷新
     }
   </script>
 
