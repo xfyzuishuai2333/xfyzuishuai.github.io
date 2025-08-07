@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>❤ 给你我的心 ❤</title>
+  <style>
+    body {
+      background: #fcefee;
+      text-align: center;
+      font-family: "Microsoft Yahei", sans-serif;
+      padding: 40px;
+      margin: 0;
+      color: #d32f2f;
+    }
+
+    .heart {
+      width: 100px;
+      height: 90px;
+      background: red;
+      position: relative;
+      transform: rotate(-45deg);
+      animation: beat 1s infinite;
+      margin: 100px auto 30px;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      width: 100px;
+      height: 90px;
+      background: red;
+      position: absolute;
+      border-radius: 50%;
+      top: 5px;
+    }
+
+    .heart::before {
+      left: 50px;
+    }
+
+    .heart::after {
+      top: -50px;
+      left: 0;
+    }
+
+    @keyframes beat {
+      0% {
+        transform: scale(1) rotate(-45deg);
+      }
+      50% {
+        transform: scale(1.1) rotate(-45deg);
+      }
+      100% {
+        transform: scale(1) rotate(-45deg);
+      }
+    }
+
+    h1 {
+      font-size: 20px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="heart"></div>
+  <h1>
+    ❤ 给你我的心 ❤<br>
+    点开链接，把爱带回家 ❤
+  </h1>
+</body>
+</html>
