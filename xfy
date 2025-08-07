@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>爱心</title>
+  <style>
+    body {
+      background: #ffe6f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .heart {
+      width: 100px;
+      height: 90px;
+      background: red;
+      position: relative;
+      transform: rotate(-45deg);
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      width: 100px;
+      height: 90px;
+      background: red;
+      position: absolute;
+      border-radius: 50%;
+      top: 5px;
+    }
+
+    .heart::before {
+      left: 50px;
+    }
+
+    .heart::after {
+      top: -50px;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="heart"></div>
+</body>
+</html>
