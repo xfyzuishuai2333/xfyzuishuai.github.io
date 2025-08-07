@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>💔 要它 or 不要它？</title>
+  <style>
+    body {
+      background: #fff0f5;
+      text-align: center;
+      padding-top: 100px;
+      font-family: '微软雅黑', sans-serif;
+      overflow: hidden;
+    }
+
+    .heart {
+      width: 120px;
+      height: 100px;
+      background: red;
+      position: relative;
+      transform: rotate(-45deg);
+      margin: 0 auto;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      width: 120px;
+      height: 100px;
+      background: red;
+      border-radius: 50%;
+      position: absolute;
+      top: 5px;
+    }
+
+    .heart::before { left: 60px; }
+    .heart::after { top: -50px; left: 0; }
+
+    .buttons {
+      margin-top: 40px;
+    }
+
+    button {
+      padding: 10px 25px;
+      margin: 0 10px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .yes-btn {
+      background-color: #e91e63;
+      color: white;
+    }
+
+    .no-btn {
+      background-color: #9e9e9e;
+      color: white;
+    }
+
+    .fireworks {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/5/52/Fireworks.gif') no-repeat center center;
+      background-size: cover;
+      opacity: 0.7;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="heartContainer">
+    <div class="heart"></div>
+    <div class="buttons">
+      <button class="yes-btn" onclick="accept()">要它</button>
+      <button class="no-btn" onclick="refuse()">不要它</button>
+    </div>
+  </div>
+
+  <div class="fireworks" id="fireworks"></div>
+
+  <script>
+    const heartContainer = document.getElementById('heartContainer');
+    const fireworks = document.getElementById('fireworks');
+
+    function accept() {
+      heartContainer.innerHTML = `<h1>❤️ 爱你！谢谢你收下我的心！</h1>`;
+      fireworks.style.display = 'block';
+
+      // 烟火保留5秒
+      setTimeout(() => {
+        fireworks.style.display = 'none';
+      }, 5000);
+    }
+
+    function refuse() {
+      // 隐藏“不要它”按钮，保留“要它”按钮
+      heartContainer.querySelectorAll('button')[1].style.display = 'none';
+
+      // 3秒后假装界面刷新（其实只是显示原始表情和按钮重新）
+      setTimeout(() => {
+        heartContainer.innerHTML = `
+          <div class="heart"></div>
+          <div class="buttons">
+            <button class="yes-btn" onclick="accept()">要它</button>
+          </div>
+        `;
+      }, 3000);
+    }
+  </script>
+
+</body>
+</html>
